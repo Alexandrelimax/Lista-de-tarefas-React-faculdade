@@ -19,6 +19,7 @@ const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, 
   const [fimTarefa, setFimTarefa] = useState('');
   const [recursoTarefa, setRecursoTarefa] = useState('');
   const [statusTarefa, setStatusTarefa] = useState('');
+  const [prioridadeTarefa, setPrioridadeTarefa] = useState('');
 
   //Abaixo setamos os valores dos states (que popularão o formulário mais abaixo) com os valores do state Tarefa,
   //  recebido como props do componente ListarTarefa.
@@ -31,6 +32,7 @@ const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, 
     setFimTarefa(tarefa.fimTarefa);
     setRecursoTarefa(tarefa.recursoTarefa);
     setStatusTarefa(tarefa.statusTarefa);
+    setPrioridadeTarefa(tarefa.prioridadeTarefa);
   },[]);
 
   const handleRecurso = (event) => {
@@ -39,6 +41,10 @@ const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, 
 
   const handleStatus = (event) => {
     setStatusTarefa(event.target.value);
+  };
+
+  const handlePrioridade = (event) => {
+    setPrioridadeTarefa(event.target.value);
   };
 
   const handleEditar = () => {
@@ -55,7 +61,8 @@ const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, 
               inicioTarefa:inicioTarefa,
               fimTarefa:fimTarefa,
               recursoTarefa:recursoTarefa,
-              statusTarefa:statusTarefa
+              statusTarefa:statusTarefa,
+              prioridadeTarefa:prioridadeTarefa
           };
         }
 
@@ -152,6 +159,26 @@ const EditarTarefa = ({handleCloseEditar, idTarefaSelecionada, tarefas, tarefa, 
                   <MenuItem value={'Aguardando'}>Aguardando</MenuItem>
                   <MenuItem value={'Em Andamento'}>Em Andamento</MenuItem>
                   <MenuItem value={'Concluída'}>Concluída</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>  
+              <FormControl fullWidth>
+                <InputLabel htmlFor="tarefa_recurso">Prioridade</InputLabel>
+                <Select
+                  id="tarefa_prioridade"
+                  value={prioridadeTarefa}
+                  label="Prioridade"
+                  onChange={handlePrioridade}
+                  size="small"
+                  sx={{
+                    color:'rgba(0, 0, 0, 0.6)',
+                    fontWeight: 400,
+                  }} 
+                >
+                  <MenuItem value={'Alta'}>Alta</MenuItem>
+                  <MenuItem value={'Média'}>Média</MenuItem>
+                  <MenuItem value={'Baixa'}>Baixa</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
